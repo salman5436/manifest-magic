@@ -4,21 +4,27 @@ class Form extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            relativePath: ''
-            
+            relativePath: '',
+            course: {}
         }
 
-        this.handleChange = this.handleChange.bind(this)
+        this.handleTextChange = this.handleTextChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)   
     }
 
-    handleChange(event) {
-        this.setState({relativePath: event.target.value})
+    handleTextChange(event) {
+        this.setState({[event.target.id]: event.target.value})
     }
 
     handleSubmit(event) {
         event.preventDefault();
-        alert('A name was submitted: ' + this.state.relativePath)
+        this.setState((state, props) => {
+            return {
+                course: state.relativePath
+            }
+        }, () => {
+            console.log(this.state)
+        })
     }
 
     render() {
@@ -26,7 +32,9 @@ class Form extends React.Component {
             <div>
                 <form onSubmit={this.handleSubmit}>
                     <label htmlFor="relativePath">Relative Path</label>
-                    <input type="text" id="relativePath" value={this.state.relativePath} onChange={this.handleChange} />
+                    <input type="text" id="relativePath" value={this.state.relativePath} onChange={this.handleTextChange} />
+                    
+                    
                     <input type="submit" value="submit" />
                 </form>
             </div>
