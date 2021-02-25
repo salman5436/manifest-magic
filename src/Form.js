@@ -9,32 +9,38 @@ class Form extends React.Component {
         }
 
         this.handleTextChange = this.handleTextChange.bind(this)
-        this.handleSubmit = this.handleSubmit.bind(this)   
+        this.handleSubmit = this.handleSubmit.bind(this)
+    }
+
+    componentDidMount() {
+      if(this.props.data) {
+        this.setState({relativePath : this.props.data.relativePath})
+      }
     }
 
     handleTextChange(event) {
         this.setState({[event.target.id]: event.target.value})
     }
 
-    handleSubmit(event) {
+    handleSubmit(event, index) {
         event.preventDefault();
         this.setState((state, props) => {
             return {
                 course: state.relativePath
             }
         }, () => {
-            console.log(this.state)
+            this.props.updateManifest(this.state.course, index )
         })
     }
 
     render() {
         return (
             <div>
-                <form onSubmit={this.handleSubmit}>
+                <form onSubmit={(e)=>this.handleSubmit(e, this.props.index)}>
                     <label htmlFor="relativePath">Relative Path</label>
                     <input type="text" id="relativePath" value={this.state.relativePath} onChange={this.handleTextChange} />
-                    
-                    
+
+
                     <input type="submit" value="submit" />
                 </form>
             </div>
@@ -48,7 +54,7 @@ export default Form
 //     type: 'course',
 //     relativePath: '',
 //     children: [
-//         { 
+//         {
 //             relativePath: '~/filePath',
 //             type: 'topic',
 //             children: [
@@ -74,7 +80,7 @@ export default Form
 //                 { name: '', value: '' }
 //             ]
 //         },
-//         { 
+//         {
 //             type: 'topic',
 //             children: [
 //             ]

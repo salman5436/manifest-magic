@@ -11,3 +11,34 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+form {
+  margin: 1em;
+  padding: 1em;
+}
+
+.container {
+  width: 70%;
+  margin: auto;
+}
+
+.form-container {
+  border: 2px solid lavender;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.form-container button {
+  margin: 1em;
+}
+
+pre {
+  width: 90%;
+  margin: 1em auto;
+  background: #eee;
+  padding: 1em;
+  line-height: 2em;
+  word-wrap: break-word;
+  white-space : pre-wrap !important;
+}
